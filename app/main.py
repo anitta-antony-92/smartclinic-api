@@ -1,7 +1,9 @@
 from fastapi import FastAPI
+from app.config import settings
 
-app = FastAPI()
+
+app = FastAPI(title=settings.APP_NAME)
 
 @app.get("/")
 def read_root():
-    return {"message" : "Welcome to SmartClinic API"}
+    return {"message" : f"Welcome to {settings.APP_NAME}"}
