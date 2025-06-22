@@ -1,5 +1,6 @@
 from pydantic import BaseModel, EmailStr
 from datetime import datetime
+from typing import Optional
 
 class UserCreate(BaseModel):
     username: str
@@ -63,6 +64,22 @@ class AppointmentCreate(AppointmentBase):
 class AppointmentOut(AppointmentBase):
     id: int
     created_at: datetime
+
+    class Config:
+        orm_mode = True
+
+
+class LabReportBase(BaseModel):
+    patient_id: int
+    report_type: str  # e.g., "PDF" or "Text"
+
+class LabReportCreate(LabReportBase):
+    report_text: Optional[str] = None
+
+class LabReportOut(LabReportBase):
+    id: int
+    uploaded_at: datetime
+    report_text: Optional[str]
 
     class Config:
         orm_mode = True

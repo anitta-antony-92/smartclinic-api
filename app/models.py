@@ -49,3 +49,17 @@ class Appointment(Base):
     # Optional: relationships for joining later
     patient = relationship("Patient")
     doctor = relationship("Doctor")
+
+
+class LabReport(Base):
+    __tablename__ = "lab_reports"
+
+    id = Column(Integer, primary_key=True, index=True)
+    patient_id = Column(Integer, ForeignKey("patients.id"), nullable=False)
+    report_type = Column(String, nullable=False)  # e.g. "PDF" or "Text"
+    file_path = Column(String, nullable=True)     # For saved files (optional)
+    report_text = Column(String, nullable=True)   # For text content
+    # uploaded_at = Column(DateTime, default=datetime.utcnow)
+    uploaded_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    patient = relationship("Patient")
