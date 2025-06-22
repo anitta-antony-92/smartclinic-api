@@ -13,3 +13,13 @@ class User(Base):
     username = Column(String, unique=True, index=True, nullable=False)
     email = Column(String, unique=True, index=True, nullable=False)
     hashed_password = Column(String, nullable=False)
+
+class Doctor(Base):
+    __tablename__ = "doctors"
+
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, nullable=False)
+    specialization = Column(String, index=True, nullable=False)
+    email = Column(String, unique=True, index=True, nullable=False)
+

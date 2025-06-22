@@ -20,3 +20,18 @@ class UserOut(BaseModel):
 class Token(BaseModel):
     access_token:str
     token_type:str
+    
+
+class DoctorBase(BaseModel):
+    name: str
+    specialization: str
+    email: EmailStr
+
+class DoctorCreate(DoctorBase):
+    pass
+
+class DoctorOut(DoctorBase):
+    id: int
+
+    class Config:
+        orm_mode = True
