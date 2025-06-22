@@ -3,6 +3,7 @@ from app.config import settings
 from app.routes import auth
 from app.routes import doctors
 from app.routes import patients
+from app.routes import appointments
 
 app = FastAPI(title=settings.APP_NAME)
 
@@ -10,6 +11,7 @@ app = FastAPI(title=settings.APP_NAME)
 app.include_router(auth.router)
 app.include_router(doctors.router)
 app.include_router(patients.router)
+app.include_router(appointments.router)
 
 # Health check / root endpoint
 @app.get("/")

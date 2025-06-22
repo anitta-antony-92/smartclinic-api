@@ -1,4 +1,5 @@
 from pydantic import BaseModel, EmailStr
+from datetime import datetime
 
 class UserCreate(BaseModel):
     username: str
@@ -46,6 +47,22 @@ class PatientCreate(PatientBase):
 
 class PatientOut(PatientBase):
     id: int
+
+    class Config:
+        orm_mode = True
+
+
+class AppointmentBase(BaseModel):
+    patient_id: int
+    doctor_id: int
+    appointment_time: datetime
+
+class AppointmentCreate(AppointmentBase):
+    pass
+
+class AppointmentOut(AppointmentBase):
+    id: int
+    created_at: datetime
 
     class Config:
         orm_mode = True
