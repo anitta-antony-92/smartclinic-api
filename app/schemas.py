@@ -20,7 +20,7 @@ class UserOut(BaseModel):
 class Token(BaseModel):
     access_token:str
     token_type:str
-    
+
 
 class DoctorBase(BaseModel):
     name: str
@@ -31,6 +31,20 @@ class DoctorCreate(DoctorBase):
     pass
 
 class DoctorOut(DoctorBase):
+    id: int
+
+    class Config:
+        orm_mode = True
+
+class PatientBase(BaseModel):
+    name: str
+    email: EmailStr
+    phone: str
+
+class PatientCreate(PatientBase):
+    pass
+
+class PatientOut(PatientBase):
     id: int
 
     class Config:
