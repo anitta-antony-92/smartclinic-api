@@ -7,7 +7,7 @@ from app.models import User
 from passlib.context import CryptContext
 from app.config import settings
 from app.schemas import UserCreate, UserOut, UserLogin, Token
-
+from app.dependencies.auth import get_current_user
 
 router = APIRouter()
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -64,3 +64,7 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
         algorithm=ALGORITHM
     )
     return {"access_token": access_token, "token_type": "bearer"}
+
+@router.get("/profile", response_model=UserOut)
+def read_profile(current_user: User = Depends(get_current_user)):
+    return current_user
